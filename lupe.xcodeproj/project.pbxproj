@@ -96,6 +96,7 @@
 				TargetAttributes = {
 					51457F631E683F7A00C20E50 = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = 9CWV89U259;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -258,7 +259,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9CWV89U259;
 				INFOPLIST_FILE = lupe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.manabu.nikaido.lupe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -270,7 +274,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 9CWV89U259;
 				INFOPLIST_FILE = lupe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.manabu.nikaido.lupe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
