@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   type = "1"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lupe/ViewController.swift"
+            timestampString = "510236899.589718"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.__deallocating_deinit"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510236899.773268"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; lupe.ViewController"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510236899.776417"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.__allocating_init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; lupe.ViewController"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510236899.778297"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;lupe.ViewController&gt;"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510236899.779844"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;lupe.ViewController&gt;"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510236899.781174"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lupe/ViewController.swift"
+            timestampString = "510236993.958797"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "captureImage(sampleBuffer:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lupe/ViewController.swift"
+            timestampString = "510237125.73458"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.__deallocating_deinit"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510237125.740893"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; lupe.ViewController"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510237125.743048"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "92">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.__allocating_init (nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;__ObjC.Bundle&gt;) -&gt; lupe.ViewController"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510237125.746199"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.__allocating_init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;lupe.ViewController&gt;"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510237125.747948"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "lupe.ViewController.init (coder : __ObjC.NSCoder) -&gt; Swift.Optional&lt;lupe.ViewController&gt;"
+                  moduleName = "lupe"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/TS/workspace_iphone/lupe/lupe/ViewController.swift"
+                  timestampString = "510237125.749404"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "100"
+                  endingLineNumber = "100"
+                  offsetFromSymbolStart = "52">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lupe/ViewController.swift"
+            timestampString = "510237164.726946"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
+            landmarkName = "captureOutput(captureOutput:didOutputSampleBuffer:fromConnection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "lupe/ViewController.swift"
+            timestampString = "510240707.200947"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
+            landmarkName = "focusWithMode(focusMode:exposeWithMode:atDevicePoint:motiorSubjectAreaChange:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
