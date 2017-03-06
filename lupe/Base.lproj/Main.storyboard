@@ -32,6 +32,9 @@
                                     <constraint firstAttribute="height" constant="80" id="uop-Vf-vk8"/>
                                 </constraints>
                             </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pZt-rq-esb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kQu-VY-Ad3">
                                 <rect key="frame" x="16" y="567" width="80" height="80"/>
                                 <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="0.25098040700000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -50,26 +53,30 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="uwe-Ox-KKi">
-                                <rect key="frame" x="114" y="607" width="247" height="31"/>
-                                <connections>
-                                    <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="NGq-7p-aiH"/>
-                                </connections>
-                            </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x10.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jPp-FY-7Bz">
                                 <rect key="frame" x="318" y="596" width="41" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="uwe-Ox-KKi">
+                                <rect key="frame" x="114" y="607" width="247" height="31"/>
+                                <connections>
+                                    <action selector="sliderChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="NGq-7p-aiH"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="pZt-rq-esb" secondAttribute="bottom" id="2Nd-GN-Dpt"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="jPp-FY-7Bz" secondAttribute="bottom" constant="50" id="6ry-Ar-v7n"/>
                             <constraint firstItem="kQu-VY-Ad3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="7jR-OR-jWn"/>
                             <constraint firstAttribute="trailing" secondItem="gxR-z6-XFT" secondAttribute="trailing" id="F3M-Ui-4oI"/>
+                            <constraint firstItem="pZt-rq-esb" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GCb-0G-70C"/>
                             <constraint firstItem="yKj-b9-XJv" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="JfX-vy-3gY"/>
+                            <constraint firstItem="pZt-rq-esb" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="Jra-6g-VKD"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="gxR-z6-XFT" secondAttribute="bottom" id="NHN-St-nci"/>
+                            <constraint firstAttribute="trailing" secondItem="pZt-rq-esb" secondAttribute="trailing" id="VIy-Sq-Jfu"/>
                             <constraint firstItem="gxR-z6-XFT" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="W2R-ns-9m0"/>
                             <constraint firstItem="jPp-FY-7Bz" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="ZaZ-Kx-me7"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="wGv-nm-Fl4" secondAttribute="bottom" constant="50" id="cJt-vP-99h"/>
@@ -87,6 +94,7 @@
                         <outlet property="image" destination="gxR-z6-XFT" id="Jb8-cD-Bwe"/>
                         <outlet property="maxZoomLabel" destination="jPp-FY-7Bz" id="Tv9-VR-QuI"/>
                         <outlet property="myButton" destination="kQu-VY-Ad3" id="wLr-bH-vhu"/>
+                        <outlet property="myScrollView" destination="pZt-rq-esb" id="SiP-zH-q0T"/>
                         <outlet property="mySlider" destination="uwe-Ox-KKi" id="kOa-d0-K9o"/>
                     </connections>
                 </viewController>

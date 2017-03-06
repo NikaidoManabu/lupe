@@ -9,5 +9,6 @@
 #ifndef Lupe_Bridging_Header_h
 #define Lupe_Bridging_Header_h
 
+#import "G8Tesseract.h"
 
 #endif /* Lupe_Bridging_Header_h */

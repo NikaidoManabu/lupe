@@ -1,13 +1,14 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController , UIGestureRecognizerDelegate{
+class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollViewDelegate{
     
     
     @IBOutlet weak var image: UIImageView!
     @IBOutlet weak var myButton: UIButton!
     @IBOutlet weak var mySlider: UISlider!
     @IBOutlet weak var maxZoomLabel: UILabel!
+    @IBOutlet weak var myScrollView: UIScrollView!
     
     // セッション.
     var mySession : AVCaptureSession!
@@ -78,6 +79,20 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate{
         self.view.addGestureRecognizer(pinchGesture)
         self.view.addGestureRecognizer(swipeGesture)
 
+        
+        // スクロールビューの設定
+        self.myScrollView.delegate = self
+        self.myScrollView.minimumZoomScale = 1
+        self.myScrollView.maximumZoomScale = 8
+        self.myScrollView.scrollEnabled = true
+        self.myScrollView.showsHorizontalScrollIndicator = true
+        self.myScrollView.showsVerticalScrollIndicator = true
+        
+        var doubleTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self
+            , action:"doubleTap:")
+        doubleTapGesture.numberOfTapsRequired = 2
+        self.StaticImageView.userInteractionEnabled = true
+        self.StaticImageView.addGestureRecognizer(doubleTapGesture)
     }
     
     @IBAction func cameraButton(_ sender: Any) {
@@ -209,18 +224,55 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate{
     
     func pinchedGesture(gestureRecgnizer: UIPinchGestureRecognizer) {
         print("ピンチしました")
-        if(mode=="Static"){//画像の拡大表示
-
-        }else if(mode=="Dynamic"){//文字認識範囲の指定
+//        if(mode=="Static"){//画像の拡大表示
+        
+//        }else
+        if(mode=="Dynamic"){//文字認識範囲の指定
+            //ピンチの範囲外を黒く塗りつぶして、画面全体の画像取得、文字認識
             
         }
     }
         
     func swipedGesture(gestureRecgnizer: UISwipeGestureRecognizer) {
-        print("スワイプしました")
-        if(mode=="Static"){//画像の座標移動
-
+//        print("スワイプしました")
+//        if(mode=="Static"){//画像の座標移動
+//
+//        }
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
+    // ピンチイン・ピンチアウト
+    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+        print("pinch")
+        return self.myImageView
+    }
+    // ダブルタップ
+    func doubleTap(gesture: UITapGestureRecognizer) -> Void {
+        
+        print(self.myScrollView.zoomScale)
+        if ( self.myScrollView.zoomScale < self.myScrollView.maximumZoomScale ) {
+            
+            var newScale:CGFloat = self.myScrollView.zoomScale * 3
+            var zoomRect:CGRect = self.zoomRectForScale(newScale, center: gesture.locationInView(gesture.view))
+            self.myScrollView.zoomToRect(zoomRect, animated: true)
+            
+        } else {
+            self.myScrollView.setZoomScale(1.0, animated: true)
         }
+    }
+    // 領域
+    func zoomRectForScale(scale:CGFloat, center: CGPoint) -> CGRect{
+        var zoomRect: CGRect = CGRect()
+        zoomRect.size.height = self.myScrollView.frame.size.height / scale
+        zoomRect.size.width = self.myScrollView.frame.size.width / scale
+        
+        zoomRect.origin.x = center.x - zoomRect.size.width / 2.0
+        zoomRect.origin.y = center.y - zoomRect.size.height / 2.0
+        
+        return zoomRect
     }
 }
 

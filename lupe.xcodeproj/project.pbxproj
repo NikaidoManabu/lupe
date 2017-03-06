@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		370454F187C171E75EAD7950 /* Pods_lupe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BED5E86D2C357D9E5ECC4AA /* Pods_lupe.framework */; };
 		51457F681E683F7A00C20E50 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51457F671E683F7A00C20E50 /* AppDelegate.swift */; };
 		51457F6A1E683F7A00C20E50 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51457F691E683F7A00C20E50 /* ViewController.swift */; };
 		51457F6D1E683F7A00C20E50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51457F6B1E683F7A00C20E50 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3BED5E86D2C357D9E5ECC4AA /* Pods_lupe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_lupe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		51457F641E683F7A00C20E50 /* lupe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = lupe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		51457F671E683F7A00C20E50 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		51457F691E683F7A00C20E50 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,9 @@
 		51457F6E1E683F7A00C20E50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51457F711E683F7A00C20E50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51457F731E683F7A00C20E50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		51457F791E6D93EA00C20E50 /* Lupe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lupe-Bridging-Header.h"; sourceTree = "<group>"; };
+		559F22B1E4EEB192A49A8E80 /* Pods-lupe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lupe.release.xcconfig"; path = "Pods/Target Support Files/Pods-lupe/Pods-lupe.release.xcconfig"; sourceTree = "<group>"; };
+		DC1D4FBF2DC12FCAD0E8E4FF /* Pods-lupe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lupe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lupe/Pods-lupe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				370454F187C171E75EAD7950 /* Pods_lupe.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +46,8 @@
 			children = (
 				51457F661E683F7A00C20E50 /* lupe */,
 				51457F651E683F7A00C20E50 /* Products */,
+				9CD18FDC1EC72F1A72AE8D09 /* Pods */,
+				72501A12AB7AE85818962259 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,12 +64,30 @@
 			children = (
 				51457F671E683F7A00C20E50 /* AppDelegate.swift */,
 				51457F691E683F7A00C20E50 /* ViewController.swift */,
+				51457F791E6D93EA00C20E50 /* Lupe-Bridging-Header.h */,
 				51457F6B1E683F7A00C20E50 /* Main.storyboard */,
 				51457F6E1E683F7A00C20E50 /* Assets.xcassets */,
 				51457F701E683F7A00C20E50 /* LaunchScreen.storyboard */,
 				51457F731E683F7A00C20E50 /* Info.plist */,
 			);
 			path = lupe;
+			sourceTree = "<group>";
+		};
+		72501A12AB7AE85818962259 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3BED5E86D2C357D9E5ECC4AA /* Pods_lupe.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9CD18FDC1EC72F1A72AE8D09 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DC1D4FBF2DC12FCAD0E8E4FF /* Pods-lupe.debug.xcconfig */,
+				559F22B1E4EEB192A49A8E80 /* Pods-lupe.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +97,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 51457F761E683F7A00C20E50 /* Build configuration list for PBXNativeTarget "lupe" */;
 			buildPhases = (
+				DEDEBEF87C0548015FDDEC33 /* [CP] Check Pods Manifest.lock */,
 				51457F601E683F7A00C20E50 /* Sources */,
 				51457F611E683F7A00C20E50 /* Frameworks */,
 				51457F621E683F7A00C20E50 /* Resources */,
+				64B26F8BD6D5539F0A45EFE2 /* [CP] Embed Pods Frameworks */,
+				FC1E1C5E4523F85C838E62BD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -132,6 +161,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		64B26F8BD6D5539F0A45EFE2 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lupe/Pods-lupe-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEDEBEF87C0548015FDDEC33 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FC1E1C5E4523F85C838E62BD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-lupe/Pods-lupe-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		51457F601E683F7A00C20E50 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -188,6 +265,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -237,6 +315,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -257,30 +336,37 @@
 		};
 		51457F771E683F7A00C20E50 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DC1D4FBF2DC12FCAD0E8E4FF /* Pods-lupe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 9CWV89U259;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = lupe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.manabu.nikaido.lupe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "lupe/Lupe-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		51457F781E683F7A00C20E50 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 559F22B1E4EEB192A49A8E80 /* Pods-lupe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = 9CWV89U259;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = lupe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.manabu.nikaido.lupe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "lupe/Lupe-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
@@ -304,6 +390,7 @@
 				51457F781E683F7A00C20E50 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
