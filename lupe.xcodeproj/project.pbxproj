@@ -13,6 +13,7 @@
 		51457F6D1E683F7A00C20E50 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51457F6B1E683F7A00C20E50 /* Main.storyboard */; };
 		51457F6F1E683F7A00C20E50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51457F6E1E683F7A00C20E50 /* Assets.xcassets */; };
 		51457F721E683F7A00C20E50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51457F701E683F7A00C20E50 /* LaunchScreen.storyboard */; };
+		5160D8721E6DCFD5005BE114 /* G8Tesseract.h in Headers */ = {isa = PBXBuildFile; fileRef = 5160D8711E6DCFD5005BE114 /* G8Tesseract.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +25,8 @@
 		51457F6E1E683F7A00C20E50 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		51457F711E683F7A00C20E50 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		51457F731E683F7A00C20E50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		51457F791E6D93EA00C20E50 /* Lupe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Lupe-Bridging-Header.h"; sourceTree = "<group>"; };
+		51457F791E6D93EA00C20E50 /* lupe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lupe-Bridging-Header.h"; sourceTree = "<group>"; };
+		5160D8711E6DCFD5005BE114 /* G8Tesseract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = G8Tesseract.h; path = Pods/TesseractOCRiOS/TesseractOCR/G8Tesseract.h; sourceTree = "<group>"; };
 		559F22B1E4EEB192A49A8E80 /* Pods-lupe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lupe.release.xcconfig"; path = "Pods/Target Support Files/Pods-lupe/Pods-lupe.release.xcconfig"; sourceTree = "<group>"; };
 		DC1D4FBF2DC12FCAD0E8E4FF /* Pods-lupe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lupe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lupe/Pods-lupe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -44,6 +46,7 @@
 		51457F5B1E683F7A00C20E50 = {
 			isa = PBXGroup;
 			children = (
+				5160D8711E6DCFD5005BE114 /* G8Tesseract.h */,
 				51457F661E683F7A00C20E50 /* lupe */,
 				51457F651E683F7A00C20E50 /* Products */,
 				9CD18FDC1EC72F1A72AE8D09 /* Pods */,
@@ -64,7 +67,7 @@
 			children = (
 				51457F671E683F7A00C20E50 /* AppDelegate.swift */,
 				51457F691E683F7A00C20E50 /* ViewController.swift */,
-				51457F791E6D93EA00C20E50 /* Lupe-Bridging-Header.h */,
+				51457F791E6D93EA00C20E50 /* lupe-Bridging-Header.h */,
 				51457F6B1E683F7A00C20E50 /* Main.storyboard */,
 				51457F6E1E683F7A00C20E50 /* Assets.xcassets */,
 				51457F701E683F7A00C20E50 /* LaunchScreen.storyboard */,
@@ -92,6 +95,17 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		5160D8701E6DCF9F005BE114 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5160D8721E6DCFD5005BE114 /* G8Tesseract.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		51457F631E683F7A00C20E50 /* lupe */ = {
 			isa = PBXNativeTarget;
@@ -103,6 +117,7 @@
 				51457F621E683F7A00C20E50 /* Resources */,
 				64B26F8BD6D5539F0A45EFE2 /* [CP] Embed Pods Frameworks */,
 				FC1E1C5E4523F85C838E62BD /* [CP] Copy Pods Resources */,
+				5160D8701E6DCF9F005BE114 /* Headers */,
 			);
 			buildRules = (
 			);
@@ -345,9 +360,18 @@
 				INFOPLIST_FILE = lupe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-weak_library",
+					"/usr/lib/libstdc++.6.0.9.dylib",
+					"-l\"stdc++\"",
+					"-framework",
+					"\"TesseractOCR\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.manabu.nikaido.lupe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "lupe/Lupe-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "lupe/lupe-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -364,9 +388,18 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-weak_library",
+					"/usr/lib/libstdc++.6.0.9.dylib",
+					"-l\"stdc++\"",
+					"-framework",
+					"\"TesseractOCR\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = jp.techacademy.manabu.nikaido.lupe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "lupe/Lupe-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "lupe/lupe-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

@@ -84,14 +84,14 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         self.myScrollView.delegate = self
         self.myScrollView.minimumZoomScale = 1
         self.myScrollView.maximumZoomScale = 8
-        self.myScrollView.scrollEnabled = true
+        self.myScrollView.isScrollEnabled = true
         self.myScrollView.showsHorizontalScrollIndicator = true
         self.myScrollView.showsVerticalScrollIndicator = true
         
-        var doubleTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self
-            , action:"doubleTap:")
+        let doubleTapGesture: UITapGestureRecognizer = UITapGestureRecognizer(target: self
+            , action: #selector(ViewController.doubleTap(gesture:)))
         doubleTapGesture.numberOfTapsRequired = 2
-        self.StaticImageView.userInteractionEnabled = true
+        self.StaticImageView.isUserInteractionEnabled = true
         self.StaticImageView.addGestureRecognizer(doubleTapGesture)
     }
     
@@ -116,9 +116,9 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
             
             //popup用view生成
             let backpopUpView = self.makeBackPopUpView()
-            self.image.addSubview(backpopUpView)
+            self.myScrollView.addSubview(backpopUpView)
             
-        
+            
             // 取得したImageのDataBufferをJpegに変換.
             let myImageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: imageDataBuffer!, previewPhotoSampleBuffer: nil)
             // JpegからUIIMageを作成.
@@ -127,7 +127,7 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
             //imageViewを作ってaddSubviewする
             let staticimageView = self.makeImageView()
             staticimageView.image = myImage
-            self.BackPopUpView.addSubview(staticimageView)
+            backpopUpView.addSubview(staticimageView)
             
             
         })
@@ -135,6 +135,8 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         myButton.backgroundColor = UIColor.blue
         }else if(mode == "Static"){
             BackPopUpView.removeFromSuperview()
+            myScrollView.removeFromSuperview()
+            myScrollView.setZoomScale(1.0, animated: false)
             StaticImageView.removeFromSuperview()
             mode="Dynamic"
             myButton.backgroundColor = UIColor.green
@@ -145,7 +147,7 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
     let BackPopUpView = UIView()
     func makeBackPopUpView() -> UIView {
         BackPopUpView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
-        BackPopUpView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.6)
+        BackPopUpView.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.8)
         return BackPopUpView
     }
     
@@ -244,35 +246,35 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         super.didReceiveMemoryWarning()
     }
     
-    // ピンチイン・ピンチアウト
-    func viewForZoomingInScrollView(scrollView: UIScrollView) -> UIView? {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         print("pinch")
-        return self.myImageView
+        return self.StaticImageView
     }
+    
     // ダブルタップ
     func doubleTap(gesture: UITapGestureRecognizer) -> Void {
-        
         print(self.myScrollView.zoomScale)
-        if ( self.myScrollView.zoomScale < self.myScrollView.maximumZoomScale ) {
-            
-            var newScale:CGFloat = self.myScrollView.zoomScale * 3
-            var zoomRect:CGRect = self.zoomRectForScale(newScale, center: gesture.locationInView(gesture.view))
-            self.myScrollView.zoomToRect(zoomRect, animated: true)
-            
+        if (self.myScrollView.zoomScale < self.myScrollView.maximumZoomScale) {
+            let newScale = self.myScrollView.zoomScale * 3
+            let zoomRect = self.zoomRectForScale(scale: newScale, center: gesture.location(in: gesture.view))
+            self.myScrollView.zoom(to: zoomRect, animated: true)
         } else {
             self.myScrollView.setZoomScale(1.0, animated: true)
         }
     }
-    // 領域
+    
     func zoomRectForScale(scale:CGFloat, center: CGPoint) -> CGRect{
-        var zoomRect: CGRect = CGRect()
-        zoomRect.size.height = self.myScrollView.frame.size.height / scale
-        zoomRect.size.width = self.myScrollView.frame.size.width / scale
-        
-        zoomRect.origin.x = center.x - zoomRect.size.width / 2.0
-        zoomRect.origin.y = center.y - zoomRect.size.height / 2.0
-        
-        return zoomRect
+        let size = CGSize(
+            width: self.myScrollView.frame.size.width / scale,
+            height: self.myScrollView.frame.size.height / scale
+        )
+        return CGRect(
+            origin: CGPoint(
+                x: center.x - size.width / 2.0,
+                y: center.y - size.height / 2.0
+            ),
+            size: size
+        )
     }
 }
 
