@@ -14,6 +14,7 @@
 		51457F6F1E683F7A00C20E50 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 51457F6E1E683F7A00C20E50 /* Assets.xcassets */; };
 		51457F721E683F7A00C20E50 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 51457F701E683F7A00C20E50 /* LaunchScreen.storyboard */; };
 		5160D8721E6DCFD5005BE114 /* G8Tesseract.h in Headers */ = {isa = PBXBuildFile; fileRef = 5160D8711E6DCFD5005BE114 /* G8Tesseract.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5160D8761E70448E005BE114 /* tessdata in Resources */ = {isa = PBXBuildFile; fileRef = 5160D8751E70448E005BE114 /* tessdata */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		51457F731E683F7A00C20E50 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		51457F791E6D93EA00C20E50 /* lupe-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "lupe-Bridging-Header.h"; sourceTree = "<group>"; };
 		5160D8711E6DCFD5005BE114 /* G8Tesseract.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = G8Tesseract.h; path = Pods/TesseractOCRiOS/TesseractOCR/G8Tesseract.h; sourceTree = "<group>"; };
+		5160D8751E70448E005BE114 /* tessdata */ = {isa = PBXFileReference; lastKnownFileType = folder; path = tessdata; sourceTree = "<group>"; };
 		559F22B1E4EEB192A49A8E80 /* Pods-lupe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lupe.release.xcconfig"; path = "Pods/Target Support Files/Pods-lupe/Pods-lupe.release.xcconfig"; sourceTree = "<group>"; };
 		DC1D4FBF2DC12FCAD0E8E4FF /* Pods-lupe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-lupe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-lupe/Pods-lupe.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -65,6 +67,7 @@
 		51457F661E683F7A00C20E50 /* lupe */ = {
 			isa = PBXGroup;
 			children = (
+				5160D8751E70448E005BE114 /* tessdata */,
 				51457F671E683F7A00C20E50 /* AppDelegate.swift */,
 				51457F691E683F7A00C20E50 /* ViewController.swift */,
 				51457F791E6D93EA00C20E50 /* lupe-Bridging-Header.h */,
@@ -169,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				51457F721E683F7A00C20E50 /* LaunchScreen.storyboard in Resources */,
+				5160D8761E70448E005BE114 /* tessdata in Resources */,
 				51457F6F1E683F7A00C20E50 /* Assets.xcassets in Resources */,
 				51457F6D1E683F7A00C20E50 /* Main.storyboard in Resources */,
 			);
