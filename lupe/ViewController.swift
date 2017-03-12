@@ -354,7 +354,7 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
                 // ピンチアウトの時、前回のズームに今回のズーム-1を指定
                 // 例: 前回3.0, 今回1.2のとき、currentZoomScale=3.2
                 if pinchZoomScale > 1.0 {
-                    currentZoomScale = oldZoomScale+pinchZoomScale-1
+                    currentZoomScale = oldZoomScale+(pinchZoomScale-1)*oldZoomScale
                 } else {
                     currentZoomScale = oldZoomScale-(1-pinchZoomScale)*oldZoomScale
                 }
