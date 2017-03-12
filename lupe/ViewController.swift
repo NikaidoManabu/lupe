@@ -1,7 +1,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollViewDelegate , G8TesseractDelegate {
+class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollViewDelegate , G8TesseractDelegate ,AVCaptureVideoDataOutputSampleBufferDelegate{
     
     
     @IBOutlet weak var image: UIImageView!
@@ -15,14 +15,14 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
     @IBOutlet weak var analyzeImageView: UIImageView!
     @IBOutlet weak var analyzeButton: UIButton!
     @IBOutlet weak var ActivityIndicatorView: UIActivityIndicatorView!
-//    @IBOutlet weak var StaticImageView: UIImageView!
     
     // セッション.
     var mySession : AVCaptureSession!
     // デバイス.
     var myDevice : AVCaptureDevice!
     // 画像のアウトプット.
-    var myImageOutput: AVCaptureStillImageOutput!
+    var input:AVCaptureDeviceInput!
+    var output:AVCaptureVideoDataOutput!
     
     //画面モード
     var mode = "Dynamic"
@@ -39,53 +39,14 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         maxZoomLabel.text = "x"+String(maxZoom)
         mySlider.value = 0
         
-        // セッションの作成.
-        mySession = AVCaptureSession()
-        
-        // デバイス一覧の取得.
-        let devices = AVCaptureDevice.devices()
-        
-        // バックカメラをmyDeviceに格納.
-        for device in devices! {
-            if((device as AnyObject).position == AVCaptureDevicePosition.back){
-                myDevice = device as! AVCaptureDevice
-            }
-        }
-        
-        // バックカメラからVideoInputを取得.
-        let videoInput = try! AVCaptureDeviceInput.init(device: myDevice)
-        // セッションに追加.
-        mySession.addInput(videoInput)
-        
-        // 出力先を生成.
-        myImageOutput = AVCaptureStillImageOutput()
-        
-        // セッションに追加.
-        mySession.addOutput(myImageOutput)
-        
-        // 画像を表示するレイヤーを生成.
-        let myVideoLayer = AVCaptureVideoPreviewLayer.init(session: mySession)
-        myVideoLayer?.frame = self.view.bounds
-        myVideoLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        
-        // Viewに追加.
-        self.image.layer.addSublayer(myVideoLayer!)
-        
-        // セッション開始.
-        mySession.startRunning()
-        
-        
-        
         // 画面タップでピントをあわせる
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(ViewController.tappedScreen(gestureRecognizer:)))
         let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(ViewController.pinchedGesture(gestureRecgnizer:)))
-//        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(ViewController.swipedGesture(gestureRecgnizer:)))
         // デリゲートをセット
         tapGesture.delegate = self
         // Viewにタップのジェスチャーを追加
         self.view.addGestureRecognizer(tapGesture)
         self.view.addGestureRecognizer(pinchGesture)
-//        self.view.addGestureRecognizer(swipeGesture)
 
         
         // スクロールビューの設定
@@ -103,6 +64,86 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         self.StaticImageView.addGestureRecognizer(doubleTapGesture)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        // カメラの設定
+        setupCamera()
+    }
+    
+    // メモリ解放
+    override func viewDidDisappear(_ animated: Bool) {
+        // camera stop メモリ解放
+        mySession.stopRunning()
+        
+        for output in mySession.outputs {
+            mySession.removeOutput(output as? AVCaptureOutput)
+        }
+        
+        for input in mySession.inputs {
+            mySession.removeInput(input as? AVCaptureInput)
+        }
+        mySession = nil
+        myDevice = nil
+    }
+    
+    func setupCamera(){
+        // AVCaptureSession: キャプチャに関する入力と出力の管理
+        mySession = AVCaptureSession()
+        
+        // sessionPreset: キャプチャ・クオリティの設定
+        mySession.sessionPreset = AVCaptureSessionPresetHigh
+        
+        
+        // デバイス一覧の取得.
+        let devices = AVCaptureDevice.devices()
+
+        // バックカメラをmyDeviceに格納.
+        for device in devices! {
+            if((device as AnyObject).position == AVCaptureDevicePosition.back){
+                myDevice = device as! AVCaptureDevice
+            }
+        }
+        
+        // カメラからの入力データ
+        do {
+            input = try AVCaptureDeviceInput(device: myDevice) as AVCaptureDeviceInput
+        } catch let error as NSError {
+            print(error)
+        }
+        
+        // 入力をセッションに追加
+        if(mySession.canAddInput(input)) {
+            mySession.addInput(input)
+        }
+        
+        // AVCaptureVideoDataOutput:動画フレームデータを出力に設定
+        output = AVCaptureVideoDataOutput()
+        
+        // 出力をセッションに追加
+        if(mySession.canAddOutput(output)) {
+            mySession.addOutput(output)
+        }
+        
+        // ピクセルフォーマットを 32bit BGR + A とする
+        output.videoSettings = [kCVPixelBufferPixelFormatTypeKey as AnyHashable : Int(kCVPixelFormatType_32BGRA)]
+        
+        // フレームをキャプチャするためのサブスレッド用のシリアルキューを用意
+        output.setSampleBufferDelegate(self, queue: DispatchQueue.main)
+        
+        output.alwaysDiscardsLateVideoFrames = true
+        
+        mySession.startRunning()
+        
+        // deviceをロックして設定
+        do {
+            try myDevice.lockForConfiguration()
+            // フレームレート
+            myDevice.activeVideoMinFrameDuration = CMTimeMake(1, 30)
+            myDevice.unlockForConfiguration()
+        } catch _ {
+        }
+    }
+
+    
     @IBAction func cameraButton(_ sender: Any) {
         onClickMyButton(sender: sender as! UIButton)
     }
@@ -113,29 +154,12 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         if(mode == "Dynamic"){
             changeMode(mode: "Static")
             
-            // ビデオ出力に接続.
-            let myVideoConnection = myImageOutput.connection(withMediaType: AVMediaTypeVideo)
-        
-            // 接続から画像を取得.
-            self.myImageOutput.captureStillImageAsynchronously(from: myVideoConnection, completionHandler: {(imageDataBuffer, error) in
-                if let e = error {
-                    print(e.localizedDescription)
-                    return
-                }
+            //imageViewを作ってaddSubviewする
+            let myImage = self.image.image
+            let staticimageView = self.makeImageView()
+            staticimageView.image = myImage
+            self.myScrollView.addSubview(staticimageView)
             
-                // 取得したImageのDataBufferをJpegに変換.
-                let myImageData = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: imageDataBuffer!, previewPhotoSampleBuffer: nil)
-                // JpegからUIIMageを作成.
-                let myImage = UIImage(data: myImageData!)
-                
-                //imageViewを作ってaddSubviewする
-                let staticimageView = self.makeImageView()
-//                self.StaticImageView.image = myImage
-                staticimageView.image = myImage
-                self.myScrollView.addSubview(staticimageView)
-            
-            })
-
         }else if(mode == "Static" || mode=="Analyze"){
             changeMode(mode: "Dynamic")
             StaticImageView.removeFromSuperview()
@@ -144,40 +168,40 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
     }
     
     
-//    func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
-//        print("captureOutput")
-//        // キャプチャしたsampleBufferからUIImageを作成
-//        let image:UIImage = self.captureImage(sampleBuffer: sampleBuffer)
-//        
-//        // カメラの画像を画面に表示
-//        let staticimageView = self.makeImageView()
-//        staticimageView.image = image
-//        self.myScrollView.addSubview(staticimageView)
-//    }
-//    func captureImage(sampleBuffer:CMSampleBuffer) -> UIImage{
-//        
-//        // Sampling Bufferから画像を取得
-//        let imageBuffer:CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
-//        
-//        // pixel buffer のベースアドレスをロック
-//        CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
-//        
-//        let baseAddress:UnsafeMutableRawPointer = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0)!
-//        
-//        let bytesPerRow:Int = CVPixelBufferGetBytesPerRow(imageBuffer)
-//        let width:Int = CVPixelBufferGetWidth(imageBuffer)
-//        let height:Int = CVPixelBufferGetHeight(imageBuffer)
-//        
-//        // 色空間
-//        let colorSpace:CGColorSpace = CGColorSpaceCreateDeviceRGB()
-//        
-//        let newContext:CGContext = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace,  bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue|CGBitmapInfo.byteOrder32Little.rawValue)!
-//        
-//        let imageRef:CGImage = newContext.makeImage()!
-//        let resultImage = UIImage(cgImage: imageRef, scale: 1.0, orientation: UIImageOrientation.right)
-//        
-//        return resultImage
-//    }
+    func captureOutput(_ captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, from connection: AVCaptureConnection!) {
+        print("captureOutput")
+        // キャプチャしたsampleBufferからUIImageを作成
+        let image:UIImage = self.captureImage(sampleBuffer: sampleBuffer)
+        
+        // カメラの画像を画面に表示
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.image.image = image
+        }
+    }
+    func captureImage(sampleBuffer:CMSampleBuffer) -> UIImage{
+        
+        // Sampling Bufferから画像を取得
+        let imageBuffer:CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+        
+        // pixel buffer のベースアドレスをロック
+        CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+        
+        let baseAddress:UnsafeMutableRawPointer = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0)!
+        
+        let bytesPerRow:Int = CVPixelBufferGetBytesPerRow(imageBuffer)
+        let width:Int = CVPixelBufferGetWidth(imageBuffer)
+        let height:Int = CVPixelBufferGetHeight(imageBuffer)
+        
+        // 色空間
+        let colorSpace:CGColorSpace = CGColorSpaceCreateDeviceRGB()
+        
+        let newContext:CGContext = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace,  bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue|CGBitmapInfo.byteOrder32Little.rawValue)!
+        
+        let imageRef:CGImage = newContext.makeImage()!
+        let resultImage = UIImage(cgImage: imageRef, scale: 1.0, orientation: UIImageOrientation.right)
+        
+        return resultImage
+    }
     
     func changeMode(mode: String){
         switch mode {
