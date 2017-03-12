@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "lupe/ViewController.swift"
-            timestampString = "510961950.706738"
+            timestampString = "510967562.351491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "479"
-            endingLineNumber = "479">
+            startingLineNumber = "516"
+            endingLineNumber = "516">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -24,11 +24,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "lupe/ViewController.swift"
-            timestampString = "510961950.706738"
+            timestampString = "510967562.351491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "446"
-            endingLineNumber = "446">
+            startingLineNumber = "483"
+            endingLineNumber = "483">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "lupe/ViewController.swift"
-            timestampString = "510961950.706738"
+            timestampString = "510967562.351491"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "579"
-            endingLineNumber = "579">
+            startingLineNumber = "616"
+            endingLineNumber = "616">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

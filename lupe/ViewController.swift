@@ -363,24 +363,42 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
     
     var ScreenShotImageView = UIImageView()
     func analyze() {
-            //解析用画像用意
-//            ScreenShotImageView = makeImageView()
-//        let capturedImage = screenCapture(view: ScreenShotImageView)! as UIImage
-//            ScreenShotImageView.image = capturedImage
-//        trim()
-
-            let tesseract = G8Tesseract(language: "jpn")
-            tesseract?.delegate = self
-            tesseract?.image = myTrim()
-            tesseract?.recognize()
-            
-            self.textLabel.text = tesseract?.recognizedText
+        //解析用画像用意
+        //デバッグ用処理軽減
+        myTrim1()//デバッグ用、画像切り取りのみ　下記コード実行時はコメントアウトしてください
+//            let tesseract = G8Tesseract(language: "jpn")
+//            tesseract?.delegate = self
+//            tesseract?.image = myTrim1()
+//            tesseract?.recognize()
+//            
+//            self.textLabel.text = tesseract?.recognizedText
 //            print(tesseract?.recognizedText)
+        //===============
+    }
+    
+    //候補2
+    func myTrim2() -> UIImage{
+        let srcImage : UIImage = self.StaticImageView.image! /* UIImagePickerなどから取得したUIImage */
+//        let cropArea = CGRect(x: myScrollView.contentOffset.x,
+//                              y: myScrollView.contentOffset.y,
+//                              width: myScrollView.bounds.height,
+//                              height: myScrollView.bounds.width)
+        let cropArea = CGRect(x: myScrollView.contentOffset.y,
+                              y: srcImage.size.width - (myScrollView.contentOffset.x + myScrollView.bounds.width),
+                              width: myScrollView.bounds.height,
+                              height: myScrollView.bounds.width)
+        let cropping = srcImage.cropping(to: cropArea)
+        //デバッグ用に解析対象の画像を表示
+        self.StaticImageView.contentMode = UIViewContentMode.scaleAspectFill
+        self.StaticImageView.image=cropping
+        self.myScrollView.zoomScale = 1.0
+        //==============
+        return cropping!
     }
     
     
-    
-    func myTrim() -> UIImage{
+    //候補1
+    func myTrim1() -> UIImage{
         // 切り抜き元となる画像を用意する。
         let srcImage : UIImage = self.StaticImageView.image! /* UIImagePickerなどから取得したUIImage */
         let scale = myScrollView.zoomScale
@@ -393,8 +411,7 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         let cropArea = CGRect(x: myScrollView.contentOffset.y,
                               y: srcImage.size.width - (myScrollView.contentOffset.x + myScrollView.bounds.width),
                               width: myScrollView.bounds.height,
-                              height: myScrollView.bounds.width)//bounds or frame
-        
+                              height: myScrollView.bounds.width)
 
         // CoreGraphicsの機能を用いて、
         // 切り抜いた画像を作成する。
@@ -402,10 +419,13 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         let trimmedImage = srcImage.cgImage?.cropping(to: cropArea)
         let uiimage = UIImage(cgImage: trimmedImage!, scale: srcImage.scale ,orientation: srcImage.imageOrientation)
         
+        
+        //デバッグ用に解析対象の画像を表示
         self.StaticImageView.contentMode = UIViewContentMode.scaleAspectFill
         self.StaticImageView.image=uiimage
         self.myScrollView.zoomScale = 1.0
-//        self.testImageView.image=uiimage
+        //==============
+        
         
         self.dismiss(animated: true, completion: nil);
         return uiimage
@@ -422,3 +442,22 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
     }
 }
 
+extension UIImage {
+    func cropping(to: CGRect) -> UIImage? {
+        var opaque = false
+        if let cgImage = cgImage {
+            switch cgImage.alphaInfo {
+            case .noneSkipLast, .noneSkipFirst:
+                opaque = true
+            default:
+                break
+            }
+        }
+        
+        UIGraphicsBeginImageContextWithOptions(to.size, opaque, scale)
+        draw(at: CGPoint(x: -to.origin.x, y: -to.origin.y))
+        let result = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return result
+    }
+}
