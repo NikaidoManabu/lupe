@@ -1,7 +1,7 @@
 import UIKit
 import AVFoundation
 
-class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollViewDelegate , G8TesseractDelegate{
+class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollViewDelegate , G8TesseractDelegate {
     
     
     @IBOutlet weak var image: UIImageView!
@@ -365,70 +365,38 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
     func analyze() {
         //解析用画像用意
         //デバッグ用処理軽減
-        myTrim1()//デバッグ用、画像切り取りのみ　下記コード実行時はコメントアウトしてください
-//            let tesseract = G8Tesseract(language: "jpn")
-//            tesseract?.delegate = self
-//            tesseract?.image = myTrim1()
-//            tesseract?.recognize()
-//            
-//            self.textLabel.text = tesseract?.recognizedText
-//            print(tesseract?.recognizedText)
+        let tesseract = G8Tesseract(language: "jpn")
+        tesseract?.delegate = self
+        tesseract?.image = myTrim()
+        tesseract?.recognize()
+            
+        self.textLabel.text = tesseract?.recognizedText
+//        print(tesseract?.recognizedText)
         //===============
     }
-    
-    //候補2
-    func myTrim2() -> UIImage{
-        let srcImage : UIImage = self.StaticImageView.image! /* UIImagePickerなどから取得したUIImage */
-//        let cropArea = CGRect(x: myScrollView.contentOffset.x,
-//                              y: myScrollView.contentOffset.y,
-//                              width: myScrollView.bounds.height,
-//                              height: myScrollView.bounds.width)
-        let cropArea = CGRect(x: myScrollView.contentOffset.y,
-                              y: srcImage.size.width - (myScrollView.contentOffset.x + myScrollView.bounds.width),
-                              width: myScrollView.bounds.height,
-                              height: myScrollView.bounds.width)
-        let cropping = srcImage.cropping(to: cropArea)
-        //デバッグ用に解析対象の画像を表示
-        self.StaticImageView.contentMode = UIViewContentMode.scaleAspectFill
-        self.StaticImageView.image=cropping
-        self.myScrollView.zoomScale = 1.0
-        //==============
-        return cropping!
-    }
-    
-    
-    //候補1
-    func myTrim1() -> UIImage{
-        // 切り抜き元となる画像を用意する。
-        let srcImage : UIImage = self.StaticImageView.image! /* UIImagePickerなどから取得したUIImage */
-        let scale = myScrollView.zoomScale
-        print(scale)
-        print(srcImage.scale)
-//        print(myScrollView.contentOffset.x)
-//        print(myScrollView.contentOffset.y)
-//        print(myScrollView.frame.width)
-//        print(myScrollView.frame.height)
-        let cropArea = CGRect(x: myScrollView.contentOffset.y,
-                              y: srcImage.size.width - (myScrollView.contentOffset.x + myScrollView.bounds.width),
-                              width: myScrollView.bounds.height,
-                              height: myScrollView.bounds.width)
 
-        // CoreGraphicsの機能を用いて、
-        // 切り抜いた画像を作成する。
-        print("\(cropArea.origin.x) \(cropArea.origin.y) \(cropArea.width) \(cropArea.height)")
-        let trimmedImage = srcImage.cgImage?.cropping(to: cropArea)
-        let uiimage = UIImage(cgImage: trimmedImage!, scale: srcImage.scale ,orientation: srcImage.imageOrientation)
+    func myTrim() -> UIImage{
+        let srcImage : UIImage = self.StaticImageView.image! /* UIImagePickerなどから取得したUIImage */
+        let factor = srcImage.size.width / self.view.frame.width;
+        let scale = 1 / self.myScrollView.zoomScale;
+        let x = self.myScrollView.contentOffset.x * scale * factor;
+        let y = self.myScrollView.contentOffset.y * scale * factor;
+        let width = myScrollView.bounds.width * scale * factor;
+        let height = myScrollView.bounds.height * scale * factor;
         
+//        print("\(factor) \(scale)")
+//        let fsf = self.myScrollView.frame//0
+//        let fsb = self.myScrollView.bounds//716,1273
+//        let fif = self.StaticImageView.frame//0
+//        let fib = self.StaticImageView.bounds//0
+//        let fsco = self.myScrollView.contentOffset//716,1273
         
-        //デバッグ用に解析対象の画像を表示
-        self.StaticImageView.contentMode = UIViewContentMode.scaleAspectFill
-        self.StaticImageView.image=uiimage
-        self.myScrollView.zoomScale = 1.0
-        //==============
-        
-        
-        self.dismiss(animated: true, completion: nil);
-        return uiimage
+        let cropArea = CGRect(x: x,
+                              y: y,
+                              width: width,
+                              height: height)
+        let cropping = srcImage.cropping(to: cropArea) //コード最下行で定義
+        return cropping!
     }
     
     @IBAction func tapAnalyzeButton(_ sender: Any) {
@@ -453,7 +421,6 @@ extension UIImage {
                 break
             }
         }
-        
         UIGraphicsBeginImageContextWithOptions(to.size, opaque, scale)
         draw(at: CGPoint(x: -to.origin.x, y: -to.origin.y))
         let result = UIGraphicsGetImageFromCurrentImageContext()
@@ -461,3 +428,4 @@ extension UIImage {
         return result
     }
 }
+
