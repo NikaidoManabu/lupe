@@ -1,0 +1,85 @@
+画像系のライブラリを探すとか
+
+カレンダー
+タスク管理
+アラーム
+
+
+センサー使う系
+
+
+
+goolgeのリアルタイム翻訳
+	カメラで文字認識＋翻訳＋重ねて表示
+
+
+画像加工ライブラリからまだ誰も使ってなさそうな機能を見つける
+
+ルーペアプリとか
+	ちっちゃい文字を拡大して表示するとか
+	手動で範囲指定してその範囲の文字認識して別枠に表示とか
+	http://blog.isana.net/2014/08/ios.html
+	画像化して一時停止するとか
+	フォーカス
+
+
+
+https://prottapp.com/ja/
+	モック
+
+広告入れといたほうがいいよ？何がヒットするかわからん
+
+
+画面側のカメラ使うとか
+
+
+
+
+
+
+操作
+メイン画面
+	ピンチ(文字認識時のみ)：範囲指定
+	タップ：フォーカス
+静止画時
+	ピンチ：拡大縮小
+	スワイプ：画像移動
+
+機能
+	静止画化：写真撮って保存しない
+		静止画時の文字認識範囲指定；画像全体を常に認識
+
+	ズーム：スライダーのみ
+
+
+文字認識
+	Tesseract
+	SwiftOCR
+	google cloud vision api
+
+バグ修正
+http://qiita.com/mm36/items/a5a265966827e32a506e
+http://qiita.com/mokemokechicken/items/6716193cfcbd0a4d8b84
+
+画像をダブルタップとピンチイン・ピンチアウトで拡大・縮小する Swift3編
+http://qiita.com/yonezawaizumi/items/bd3f53b2f4d80f815357
+
+
+Error opening data file /var/containers/Bundle/Application/8D4A43A9-65FA-40FC-8EB2-9BB2EBEE0F8E/lupe.app/tessdata/jpn.traineddata
+Please make sure the TESSDATA_PREFIX environment variable is set to the parent directory of your "tessdata" directory.
+Failed loading language 'jpn'
+Tesseract couldn't load any languages!
+
+切り取り
+http://www.yoheim.net/blog.php?q=20120503
+
+
+ライセンス
+Icon
+http://?
+MIT
+https://github.com/ruslanskorb/RSKImageCropper
+
+
+TODO
+アプリアイコン
