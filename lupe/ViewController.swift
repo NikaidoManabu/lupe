@@ -14,7 +14,7 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
     @IBOutlet weak var cameraImageView: UIImageView!
     @IBOutlet weak var analyzeImageView: UIImageView!
     @IBOutlet weak var analyzeButton: UIButton!
-    @IBOutlet weak var testImageView: UIImageView!
+    @IBOutlet weak var ActivityIndicatorView: UIActivityIndicatorView!
 //    @IBOutlet weak var StaticImageView: UIImageView!
     
     // セッション.
@@ -112,8 +112,8 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
     func onClickMyButton(sender: UIButton){
         if(mode == "Dynamic"){
             changeMode(mode: "Static")
+            
             // ビデオ出力に接続.
-            // let myVideoConnection = myImageOutput.connectionWithMediaType(AVMediaTypeVideo)
             let myVideoConnection = myImageOutput.connection(withMediaType: AVMediaTypeVideo)
         
             // 接続から画像を取得.
@@ -142,6 +142,42 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
             
         }
     }
+    
+    
+//    func captureOutput(captureOutput: AVCaptureOutput!, didOutputSampleBuffer sampleBuffer: CMSampleBuffer!, fromConnection connection: AVCaptureConnection!) {
+//        print("captureOutput")
+//        // キャプチャしたsampleBufferからUIImageを作成
+//        let image:UIImage = self.captureImage(sampleBuffer: sampleBuffer)
+//        
+//        // カメラの画像を画面に表示
+//        let staticimageView = self.makeImageView()
+//        staticimageView.image = image
+//        self.myScrollView.addSubview(staticimageView)
+//    }
+//    func captureImage(sampleBuffer:CMSampleBuffer) -> UIImage{
+//        
+//        // Sampling Bufferから画像を取得
+//        let imageBuffer:CVImageBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)!
+//        
+//        // pixel buffer のベースアドレスをロック
+//        CVPixelBufferLockBaseAddress(imageBuffer, CVPixelBufferLockFlags(rawValue: 0))
+//        
+//        let baseAddress:UnsafeMutableRawPointer = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0)!
+//        
+//        let bytesPerRow:Int = CVPixelBufferGetBytesPerRow(imageBuffer)
+//        let width:Int = CVPixelBufferGetWidth(imageBuffer)
+//        let height:Int = CVPixelBufferGetHeight(imageBuffer)
+//        
+//        // 色空間
+//        let colorSpace:CGColorSpace = CGColorSpaceCreateDeviceRGB()
+//        
+//        let newContext:CGContext = CGContext(data: baseAddress, width: width, height: height, bitsPerComponent: 8, bytesPerRow: bytesPerRow, space: colorSpace,  bitmapInfo: CGImageAlphaInfo.premultipliedFirst.rawValue|CGBitmapInfo.byteOrder32Little.rawValue)!
+//        
+//        let imageRef:CGImage = newContext.makeImage()!
+//        let resultImage = UIImage(cgImage: imageRef, scale: 1.0, orientation: UIImageOrientation.right)
+//        
+//        return resultImage
+//    }
     
     func changeMode(mode: String){
         switch mode {
@@ -192,6 +228,7 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
             analyzeImageView.image=UIImage(named: "Cancel.png")!
             analyzeButton.isHidden=false
             textLabel.isHidden=false
+            textLabel.text=""
 //            print("zoomScale \(myScrollView.zoomScale)")
             break
         default:
@@ -217,8 +254,10 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         if(zoom < 1.0){zoom = 1.0}
         do {
             try myDevice.lockForConfiguration()
-            myDevice.ramp(toVideoZoomFactor: CGFloat(zoom), withRate: 100000.0)
+//            myDevice.ramp(toVideoZoomFactor: CGFloat(zoom), withRate: 100000.0)
+            myDevice.videoZoomFactor = CGFloat(zoom)
             myDevice.unlockForConfiguration()
+            oldZoomScale = CGFloat(zoom)
         } catch {
             
         }
@@ -360,19 +399,16 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
         )
     }
     
-    
-    var ScreenShotImageView = UIImageView()
     func analyze() {
         //解析用画像用意
-        //デバッグ用処理軽減
         let tesseract = G8Tesseract(language: "jpn")
         tesseract?.delegate = self
         tesseract?.image = myTrim()
         tesseract?.recognize()
-            
+        
+        ActivityIndicatorView.stopAnimating()
         self.textLabel.text = tesseract?.recognizedText
 //        print(tesseract?.recognizedText)
-        //===============
     }
 
     func myTrim() -> UIImage{
@@ -401,8 +437,13 @@ class ViewController: UIViewController , UIGestureRecognizerDelegate , UIScrollV
     
     @IBAction func tapAnalyzeButton(_ sender: Any) {
         if(mode=="Static"){
+            ActivityIndicatorView.startAnimating()
             changeMode(mode: "Analyze")
-            analyze()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.analyze()
+                self.ActivityIndicatorView.stopAnimating()
+                
+            }
         }else if(mode=="Analyze"){
             changeMode(mode: "Static")
         }
